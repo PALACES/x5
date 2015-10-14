@@ -34,11 +34,14 @@ void setup() {
    redX=  random( middle,right );   redY=  random( top, bottom );
    yelX=  random( middle,right );   yelY=  random( top, bottom );
    bluX=  random( middle,right );   bluY=  random( top, bottom );
+   cueX=  random( middle,right );   cueY=  random( top, bottom);
    // Random speeds
    redDX=  random( 1,3 );   redDY=  random( 1,3 );
    yelDX=  random( 1,3 );   redDY=  random( 1,3 );
    bluDX=  random( 1,3 );   bluDY=  random( 1,3 );
+   cueDX=  random( 1,3 );   cueDY=  random( 1,3 );
  }
+
 
 //// NEXT FRAME:  table, bounce off walls, collisions, show all
 void draw() {
@@ -65,18 +68,49 @@ void table( float left, float top, float right, float bottom ) {
 void bounce() {
   redX += redDX;  if ( redX<left || redX>right ) redDX *= -1;
   redY += redDY;  if ( redY<top || redY>bottom ) redDY *=  -1;
-
+  
   yelX += yelDX;  if ( yelX<left || yelX>right ) yelDX *= -1;
   yelY += yelDY;  if ( yelY<top || yelY>bottom ) yelDY *=  -1;
 
+  cueX += cueDX; if ( cueX<left || cueX>right ) cueDX *= -1;
+  cueY += cueDY; if ( cueY<top || cueY>bottom ) cueDY *= -1;
+
+  bluX += bluDX; if ( bluX<left || bluX>right ) bluDX *= -1;
+  bluY += bluDY; if ( bluY<top || bluY>bottom ) bluDY *= -1;
 }
+
 void collisions() {
   float tmp;
   // Swap velocities!
   if ( dist( redX,redY, yelX,yelY ) < 30 ) {
     tmp=yelDX;  yelDX=redDX;  redDX=tmp;
     tmp=yelDY;  yelDY=redDY;  redDY=tmp;
-  }
+   }  
+  if (dist(bluX,bluY, cueX, cueY) < 30 ) {
+    tmp=cueDX; cueDX=bluDX; bluDX=tmp;
+    tmp=cueDY; cueDY=bluDY; bluDY=tmp;
+   }
+   if (dist(redX,redY, bluX, bluY) < 30 ) {
+    tmp=bluDX; bluDX=redDX; redDX=tmp;
+    tmp=bluDY; bluDY=redDY; redDY=tmp;
+   }
+  if (dist(cueX,cueY, yelX, yelY) < 30 ) {
+    tmp=yelDX; yelDX=cueDX; cueDX=tmp;
+    tmp=yelDY; yelDY=cueDY; cueDY=tmp;
+   }
+  if (dist(cueX,cueY, redX, redY) < 30 ) {
+    tmp=redDX; redDX=cueDX; cueDX=tmp;
+    tmp=redDY; redDY=cueDY; cueDY=tmp;
+
+   }
+  if (dist(cueX,cueY, redX, redY) < 30 ) {
+    tmp=redDX; redDX=cueDX; cueDX=tmp;
+    tmp=redDY; redDY=cueDY; cueDY=tmp;
+   }
+   if (dist(bluX,bluY, yelX, yelY) < 30 ) {
+    tmp=yelDX; yelDX=bluDX; bluDX=tmp;
+    tmp=yelDY; yelDY=bluDY; bluDY=tmp;
+   }
 }
 
 //// SHOW:  balls, messages
