@@ -5,7 +5,7 @@
 
 String title=  "ELASTIC COLLISIONS  (x5eve.java)";
 String news=   "Use 'r' key to reset.";
-String author=  "Your Name";
+String author=  "Alex Reid";
 
 
 float left, right, top, bottom;
@@ -102,10 +102,6 @@ void collisions() {
     tmp=redDX; redDX=cueDX; cueDX=tmp;
     tmp=redDY; redDY=cueDY; cueDY=tmp;
 
-   }
-  if (dist(cueX,cueY, redX, redY) < 30 ) {
-    tmp=redDX; redDX=cueDX; cueDX=tmp;
-    tmp=redDY; redDY=cueDY; cueDY=tmp;
    }
    if (dist(bluX,bluY, yelX, yelY) < 30 ) {
     tmp=yelDX; yelDX=bluDX; bluDX=tmp;
